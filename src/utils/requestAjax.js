@@ -23,6 +23,7 @@ export default {
             })
         })
     },
+    
     post: (opt) => {
         return new Promise((reslove, reject) => {
             axios({
