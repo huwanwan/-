@@ -5,5 +5,22 @@
     "latest",
     "stage-2"
   ],
-  "plugins": ["transform-decorators-legacy"]
+  "plugins": [
+    ["transform-decorators-legacy"],
+    [
+    "import",
+    {
+      "libraryName": "antd",
+      "libraryDirectory": "es",
+      "style": "css"
+    },
+    "transform-runtime",
+   [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": "css"
+      }
+    ]
+  ]]// `style: true` 会加载 less 文件
 }

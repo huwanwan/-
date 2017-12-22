@@ -6,7 +6,7 @@
 */
 import axios from 'axios';
 import qs from 'qs';
-var baseUrl = 'http://10.3.135.242:555/php/';
+var baseUrl = 'http://10.3.135.242:666/';
 var fliterUrl = function (url) {
     if (url.startsWith('http')) {
         return url;
@@ -23,6 +23,7 @@ export default {
             })
         })
     },
+    
     post: (opt) => {
         return new Promise((reslove, reject) => {
             axios({
