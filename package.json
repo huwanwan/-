@@ -38,9 +38,14 @@
   "author": "DK.Lan",
   "license": "ISC",
   "dependencies": {
+    "antd": "^3.0.2",
+    "antd-mobile": "^2.1.2",
     "axios": "^0.17.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
     "events": "^1.1.1",
     "flux": "^3.1.2",
-    "qs": "^6.5.1"
+    "qs": "^6.5.1",
+    "reactui-upload": "0.0.1"
   }
 }

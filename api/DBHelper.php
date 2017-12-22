@@ -1,20 +1,17 @@
-<? php
-//http://www.runoob.com/php/php-mysql-select.html
+<?php
     function connect_oop() {
         // 配置参数
         $servername = 'localhost';
         $username = 'root';
-        $password = 'root';
-        $database = '1000phone';
-
+        $password = '';
+        $database = 'pet';
         //连接数据库
         $conn = new mysqli($servername, $username, $password, $database);
-
         // 检测连接
         if ($conn -> connect_error) {
             die('连接失败'.$conn -> connect_error);
         }
-
+        
         $conn -> set_charset('utf8');
         return $conn;
     }
@@ -67,16 +64,17 @@ function multi_query_oop($sql) {
 function connect() {
     $servername = "localhost";//
     $username = "root";
-    $password = "root";
-    $dbname = '1000phone';
+    $password = "";
+    $dbname = 'pet';
     //初始化连接，返回一个连接对象(包含所连接数据库的信息)
     $con = mysqli_connect($servername, $username, $password, $dbname);
-
+    header('Access-Control-Allow-Origin:*');
     //获取连接对象的错误信息
     if (mysqli_connect_error($con)) {
         echo "连接 MySQL 失败: ".mysqli_connect_error();
         return null;
     }
+    $con -> set_charset('utf8');
     return $con;
 }
 

@@ -6,7 +6,7 @@
 */
 import axios from 'axios';
 import qs from 'qs';
-var baseUrl = 'http://10.3.135.242:555/php/';
+var baseUrl = 'http://10.3.135.254:2018/';
 var fliterUrl = function (url) {
     if (url.startsWith('http')) {
         return url;
@@ -27,7 +27,7 @@ export default {
         return new Promise((reslove, reject) => {
             axios({
                 url: fliterUrl(opt.url),
-                data: qs.stringify(opt.parmas),
+                data: qs.stringify(opt.params),
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
