@@ -16,8 +16,10 @@
             echo 'true';
         }
     }else if($password != "" && $phoneNum != ""){
+        
         // 给密码加密
         $password = md5($password);
+
         // 将数据写入数据库并返回信息
         // 将数据写进数据库
         $sql = "insert into user(phoneNum,password) values ('$phoneNum','$password')";
@@ -28,7 +30,7 @@
         // $row = $result->fetch_all(MYSQLI_ASSOC);
         if($result){
             // 插入成功
-            echo "ok";
+            echo "true";
         }else{
             echo "fail";
         }

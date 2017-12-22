@@ -11,7 +11,8 @@
     
     // 给某一分类进行排序
     if($classify != "" && $state != "" && $type != ""){
-        $sql = "select * from pet where classify = '$classify' order by $type $state";
+        // $sql = "select * from pet where classify = '$classify' order by $type $state";
+        $sql = "select allimg.goodsImg,pet.*,`user`.address,`user`.username from pet inner join allimg on allimg.goodsId = pet.goodsId inner join `user` on `user`.phoneNum = pet.phoneNum WHERE pet.classify = '$classify' order by $type $state";
         $result = query_oop($sql);
         if($result){
             echo json_encode($result,JSON_UNESCAPED_UNICODE);
@@ -21,7 +22,9 @@
         }
     }else if($state != "" && $type != ""){
         // 根据字段升降序
-        $sql = "select * from pet order by $type $state";
+        // $sql = "select * from pet order by $type $state";
+        $sql = "select allimg.goodsImg,pet.*,`user`.address,`user`.username from pet inner join allimg on allimg.goodsId = pet.goodsId inner join `user` on `user`.phoneNum = pet.phoneNum order by $type $state";
+
         $result = query_oop($sql);
         if($result){
             echo json_encode($result,JSON_UNESCAPED_UNICODE);
@@ -31,7 +34,8 @@
         }
     }else if($classify != ""){
         // 狗分类查询
-        $sql = "select * from pet where classify = '$classify'";
+        // $sql = "select * from pet where classify = '$classify'";
+        $sql = "select allimg.goodsImg,pet.*,`user`.address,`user`.username from pet inner join allimg on allimg.goodsId = pet.goodsId inner join `user` on `user`.phoneNum = pet.phoneNum WHERE pet.classify = '$classify'";
         $result = query_oop($sql);
         if($result){
             echo json_encode($result,JSON_UNESCAPED_UNICODE);
@@ -41,7 +45,8 @@
         }
     }else{
         // 全部数据查询语句
-        $sql = "select * from pet";
+        // $sql = "select * from pet";
+        $sql = "select allimg.goodsImg,pet.*,`user`.address,`user`.username from pet inner join allimg on allimg.goodsId = pet.goodsId inner join `user` on `user`.phoneNum = pet.phoneNum";
         $result = query_oop($sql);
         if($result){
             echo json_encode($result,JSON_UNESCAPED_UNICODE);

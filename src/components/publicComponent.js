@@ -11,6 +11,7 @@ export default class PublicComponent extends React.Component{
         theme: 'dark',
         current: '1',
     }
+    
     changeTheme = (value) => {
         this.setState({
             theme: value ? 'dark' : 'light',
@@ -54,7 +55,6 @@ export default class PublicComponent extends React.Component{
                         <Menu.Item key="1">周边产品</Menu.Item>
                         <Menu.Item key="2">宠物信息</Menu.Item>
                         <Menu.Item key="3">库存预警</Menu.Item>
-                        <Menu.Item key="4">商品上架</Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>用户管理</span></span>}>
                         <Menu.Item key="11">用户信息</Menu.Item>
