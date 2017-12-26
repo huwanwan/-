@@ -1,9 +1,15 @@
 {
   "presets": [
-   	["es2015", { "modules": false }],
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ],
     "react",
     "latest",
     "stage-2",
+    "stage-0",
     [
       "env",
       {
@@ -19,21 +25,7 @@
     ]
   ],
   "plugins": [
-    ["transform-decorators-legacy"],
-    [
-    "import",
-    {
-      "libraryName": "antd",
-      "libraryDirectory": "es",
-      "style": "css"
-    },
-    "transform-runtime",
-   [
-      "import",
-      {
-        "libraryName": "antd",
-        "style": "css"
-      }
-    ]
-  ]]// `style: true` 会加载 less 文件
+    "transform-decorators-legacy",
+    "transform-class-properties"
+  ]
 }

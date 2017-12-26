@@ -1,8 +1,9 @@
 export function goLogin(name,psd){
     return {
-        types:['beforeRequest','requested','error'],
-        'url':'login.php',
-        'params': {phoneNum:name,password:psd}
+        types:['beforeLogin','loginRequested','errorLogin'],
+        'url':'staff.php',
+        'params': {username:name,password:psd},
+        method:'post'
     }
 }
 export function closeTips(){

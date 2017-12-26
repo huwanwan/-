@@ -4,7 +4,6 @@ import {Provider} from 'react-redux';
 import {Router,Route,hashHistory} from 'react-router';
 import routes from './routers/routes';
 import store from './store/configStore';
-import Login from './components/loginComponent/loginComponent';
 import 'antd/dist/antd.css';
 import './sass/_base.scss';
 ReactDOM.render(

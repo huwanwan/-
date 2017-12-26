@@ -1,10 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {hashHistory} from 'react-router';
 import { Spin } from 'antd';
 import { Alert } from 'antd';
 import * as LoginAction from '../../actions/loginAciton';
 import '../../sass/login.scss';
 class LoginComponent extends React.Component{
+    componentWillMount(){
+        this.setState({
+            username:'',
+            password:'',
+            show:'hide'
+        })
+    }
     getName(event){
         this.setState({'username':event.target.value})
     }
@@ -13,6 +21,10 @@ class LoginComponent extends React.Component{
     }
     goLogin(){
         this.props.goLogin(this.state.username,this.state.password);
+        window.sessionStorage.setItem('username', this.state.username);
+        this.setState({
+            show: ""
+        })
     }
     close(){
         this.props.closeTips();
@@ -20,7 +32,7 @@ class LoginComponent extends React.Component{
     render(){
         return (
             <div id="login" onClick={this.close.bind(this)}>
-                <div className={this.props.class}>
+                <div className={this.state.show != "" ? this.state.show : this.props.class}>
                     <Spin></Spin>
                 </div>
                 <Alert message="很抱歉,您的帐号密码输入有误,请重新输入!" className={this.props.err} type="error"  />
@@ -40,16 +52,24 @@ class LoginComponent extends React.Component{
         )
     }
     componentDidUpdate(){
-        if(this.props.status){
-            
+        if (this.props.position != "" && this.props.position != "fail" && this.state.username != "") {
+            window.sessionStorage.setItem('position', this.props.position);
+            hashHistory.push("/index");
         }
+    }
+    componentWillUnmount(){
+        this.setState({
+            'username': "",
+            "password": ""
+        })
     }
 }
 const mapToState = function(state){
     return {
-        status:state.Login.status,
+        status: state.Login.status,
         class: state.Login.class ? state.Login.class : 'float hide',
-        err:state.Login.err == "" ? "" : 'hide',
+        position: state.Login.position ? state.Login.position : "",
+        err:state.Login.err == "" ? "" : 'hide'
     }
 }
 export default connect(mapToState, LoginAction)(LoginComponent);

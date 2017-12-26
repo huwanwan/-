@@ -1,16 +1,16 @@
 export default function LoginRudex(state={},action){
     let newState = JSON.parse(JSON.stringify(state));
     switch(action.type){
-        case 'beforeRequest':
+        case 'beforeLogin':
             newState = {
                 class:'float',
                 err: 'hide'
             }
             break;
-        case 'requested':
+        case 'loginRequested':
             newState = testRes(action.res);
             break;
-        case 'requertError':
+        case 'errorLogin':
             newState = {
                 class: 'float hide',
                 status:false,
@@ -19,17 +19,19 @@ export default function LoginRudex(state={},action){
             break;
         case 'close':
             newState = {
-                err : 'hide'
+                err : 'hide',
+                class: 'float hide',
             }
             break;
     }
     return newState;
 }
 function testRes(res){
-    if (res.data === true){
+    if (res.data != "fail"){
         return {
             status: true,
             class: 'float hide',
+            position:res.data,
             err:'hide'
         }
     }else{
