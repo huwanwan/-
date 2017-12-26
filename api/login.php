@@ -1,6 +1,5 @@
 <?php
     include 'DBHelper.php';
-    header('Access-Control-Allow-Origin:*');
     $phoneNum = isset($_GET['phoneNum']) ? $_GET['phoneNum'] : "";
     $password = isset($_GET['password']) ? $_GET['password'] : "";
     // 加密

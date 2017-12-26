@@ -1,7 +1,5 @@
 <?php 
     include './DBHelper.php';
-    
-    header('Access-Control-Allow-Origin:*');
     $id = isset($_POST["id"]) ? $_POST["id"] : "";
     $page = isset($_POST["page"]) ? $_POST["page"] : 1;
     $limit = isset($_POST["limit"]) ? $_POST["limit"] : 8;

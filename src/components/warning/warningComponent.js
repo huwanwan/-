@@ -1,6 +1,6 @@
 import React from 'react';
 import Datagrid from '../datagridComponent/datagridComponent';
-import '../../sass/pet.scss';
+import '../../sass/titleTips.scss';
 export default class WarningComponent extends React.Component {
     render() {
         return (

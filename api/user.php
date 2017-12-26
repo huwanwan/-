@@ -13,10 +13,7 @@
     // state=1 表示浏览历史，state=2 表示收藏
     $state = isset($_POST['state']) ? $_POST['state'] : "";
     $goodsId = isset($_POST['goodsId']) ? $_POST['goodsId'] : "";
-<<<<<<< HEAD
-=======
     $keyWord = isset($_POST["keyWord"]) ? $_POST["keyWord"] : "";
->>>>>>> 723340d67f661b529759775a904b0027336400ee
 
     if($status == "get" && $phoneNum != ""){
         // 查询
@@ -96,20 +93,6 @@
             echo 'false';
         }
     }else if($state == "1" || $state == "2"){
-<<<<<<< HEAD
-        
-        // 查询收藏与浏览记录
-        $sql = "select h.phoneNumId,pet.* from `history_collect` as h inner join user on user.phoneNum = h.phoneNumId inner join pet on pet.goodsId = h.goodsId WHERE h.`status` = '$state'";
-        $result = query_oop($sql);
-        if($result){
-            echo json_encode($result,JSON_UNESCAPED_UNICODE);
-        }else{
-            // 表示数据不存在
-            echo 'false';
-        }
-    }
-
-=======
         // 查询收藏与浏览记录
         $sql = "select allimg.goodsImg,history_collect.status,pet.* from pet inner join history_collect on history_collect.goodsId = pet.goodsId inner join allimg on history_collect.goodsId = allimg.goodsId WHERE history_collect.status = '$state' and history_collect.phoneNumId = '$phoneNum'";
         $result = query_oop($sql);
@@ -190,5 +173,4 @@
     }
 
 
->>>>>>> 723340d67f661b529759775a904b0027336400ee
 ?>

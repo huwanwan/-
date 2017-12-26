@@ -6,11 +6,7 @@
 */
 import axios from 'axios';
 import qs from 'qs';
-<<<<<<< HEAD
 var baseUrl = 'http://10.3.135.254:2018/';
-=======
-var baseUrl = 'http://10.3.135.242:666/';
->>>>>>> 723340d67f661b529759775a904b0027336400ee
 var fliterUrl = function (url) {
     if (url.startsWith('http')) {
         return url;

@@ -14,11 +14,7 @@ export default function(state={},action){
             newState.total = data.total;
             newState.shade = "shade hide";
             newState.loading = "loading hide";
-<<<<<<< HEAD
             newState.iCurUrl = action.iCurUrl;
-=======
-            newState.reqUrl = action.reqUrl;
->>>>>>> 723340d67f661b529759775a904b0027336400ee
             break;    
         case 'error':
             newState.err = action.error;
@@ -29,7 +25,6 @@ export default function(state={},action){
             newState.moreData = dispatchSingle(action.res.data);
             newState.shade = "shade hide";
             newState.loading = "loading hide";
-<<<<<<< HEAD
             newState.iCurUrl = action.iCurUrl;
             break;
         case 'datagridSearch':
@@ -44,9 +39,6 @@ export default function(state={},action){
             newState.shade = "shade hide";
             newState.loading = "loading hide";
             newState.keyWord = action.keyWord;
-=======
-            newState.reqUrl = action.reqUrl;
->>>>>>> 723340d67f661b529759775a904b0027336400ee
             break;
     }
     return newState;
@@ -84,10 +76,6 @@ function disposeData(result){
         })
         function filterOrder(arr) {
             for (var i = 0; i < arr.length; i++) {
-<<<<<<< HEAD
-=======
-                console.log(arr[i].qty)
->>>>>>> 723340d67f661b529759775a904b0027336400ee
                 if(arr[i].status == "1"){
                     arr[i].status = "待支付";
                 } else if (arr[i].status == "2"){
@@ -122,15 +110,10 @@ function dispatchSingle(res){
     }
     if(res[0].orderId){
         for(var i = 1;i < res.length;i++){
-<<<<<<< HEAD
             res[0].name += ',' + res[i].name;
             res[0].goodsId += ',' + res[i].goodsId;
             res[0].price = res[0].price - 0;
             res[0].price += Number(res[i].price);
-=======
-            res[0].name += res[i].name + '\n';
-            res.splice(i,1);
->>>>>>> 723340d67f661b529759775a904b0027336400ee
         }
         return res;
     }

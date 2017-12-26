@@ -10,7 +10,7 @@ const content = <Button type="primary"><Link to="/">退出</Link></Button>;
 export default class PublicComponent extends React.Component{
     state = {
         theme: 'dark',
-        current: '12',
+        current: '1',
     }
     
     changeTheme = (value) => {
@@ -19,6 +19,7 @@ export default class PublicComponent extends React.Component{
         });
     }
     handleClick = (e) => {
+        window.sessionStorage.setItem('key',e.key);
         this.setState({
             current: e.key,
         });
@@ -26,6 +27,13 @@ export default class PublicComponent extends React.Component{
     componentWillMount(){
         if(!window.sessionStorage.getItem('username')){
                 hashHistory.push("/");
+        }
+    }
+    componentDidMount(){
+        if (window.sessionStorage.getItem('key')){
+            this.setState({
+                current: window.sessionStorage.getItem('key')
+            });
         }
     }
     componentWillUnmount(){
@@ -82,12 +90,12 @@ export default class PublicComponent extends React.Component{
                     selectedKeys={[this.state.current]}
                     mode="inline"
                 >
-                    <Menu.Item key="12"><Icon type="home" /><Link to="/index/home">首页</Link></Menu.Item>
+                    <Menu.Item key="12"><Icon type="home" />首页</Menu.Item>
                     <SubMenu key="sub1" title={<span><Icon type="shop" /><span>商品管理</span></span>}>
                         <Menu.Item key="1">
                             <Link to="/index/proprietary">周边产品</Link></Menu.Item>
-                        <Menu.Item key="2">宠物信息</Menu.Item>
-                        <Menu.Item key="3">库存预警</Menu.Item>
+                        <Menu.Item key="2"><Link to="/index/pet">宠物信息</Link></Menu.Item>
+                        <Menu.Item key="3"><Link to="/index/warning">库存预警</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>用户管理</span></span>}>
                         <Menu.Item key="11"><Link to="/index/userManage">用户信息</Link></Menu.Item>
@@ -99,8 +107,8 @@ export default class PublicComponent extends React.Component{
                         <Menu.Item key="7"><Link to="/index/userSeller">用户交易订单</Link></Menu.Item>
                     </SubMenu>
                     <SubMenu key="sub4" title={<span><Icon type="user" /><span>员工管理</span></span>}>
-                        <Menu.Item key="9">员工信息</Menu.Item>
-                        <Menu.Item key="10">设置</Menu.Item>
+                        <Menu.Item key="9"><Link to="/index/staff">员工信息</Link></Menu.Item>
+                        <Menu.Item key="10"><Link to="/index/setting">个人中心</Link></Menu.Item>
                     </SubMenu>
                 </Menu>
                 <Content style={{ margin: '0 16px', float: 'left',width: '78%'}}>

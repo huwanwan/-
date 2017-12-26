@@ -1,6 +1,6 @@
 import React from 'react';
 import Datagrid from '../datagridComponent/datagridComponent';
-import '../../sass/pet.scss';
+import '../../sass/titleTips.scss';
 export default class PetComponent extends React.Component{
     render(){
         return (

@@ -1,6 +1,5 @@
 <?php 
     include './DBHelper.php';
-    header('Access-Control-Allow-Origin:*');
     $status = isset($_POST["status"]) ? $_POST["status"] : "";
     $goodsId = isset($_POST["goodsId"]) ? $_POST["goodsId"] : "";
     $id = isset($_POST["id"]) ? $_POST["id"] : "";

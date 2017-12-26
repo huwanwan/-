@@ -2,7 +2,7 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 import {message} from 'antd';
 import Datagrid from '../datagridComponent/datagridComponent';
-import '../../sass/pet.scss';
+import '../../sass/titleTips.scss';
 export default class StaffComponent extends React.Component {
     warning = () => {
         message.warning(

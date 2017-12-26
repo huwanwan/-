@@ -1,6 +1,5 @@
 <?php
     include './DBHelper.php';
-    header('Access-Control-Allow-Origin:*');
     /*
         参数:
             phoneNum:用户注册手机号码;

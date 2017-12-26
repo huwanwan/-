@@ -4,7 +4,7 @@ import Datagrid from '../datagridComponent/datagridComponent';
 import store from '../../store/configStore';
 import * as datagridAction from '../../actions/datagridAction';
 import "../../sass/settingComponnent.scss"
-import '../../sass/pet.scss';
+import '../../sass/titleTips.scss';
 class SettingComponent extends React.Component {
     state = {
         data:{}

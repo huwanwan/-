@@ -41,29 +41,29 @@
                 }
                 th{
                     padding:5px;
-                }
-<<<<<<< HEAD
-                >td{
-                    font-size:12px; 
-                    max-height:65px;
-                    padding:5px;     
+                    min-width:50px;
+                    &:first-child{
+                        min-width:62px;
+                    }
                     &:nth-child(2),&:nth-child(4){
-                        max-width:416px;
+                        max-width:320px;
                         padding:5px 10px;
                         overflow:hidden;
                         text-overflow:ellipsis;
                         white-space:nowrap;
                     }
-=======
-                
-                td{
-                    font-size:12px; 
-                    padding:5px 6px;     
                 }
-                td:nth-child(2){
-                    width:180px;
-                    text-align:left;
->>>>>>> 723340d67f661b529759775a904b0027336400ee
+                >td{
+                    font-size:12px; 
+                    max-height:65px;
+                    padding:5px;     
+                    &:nth-child(2),&:nth-child(4){
+                        max-width:320px;
+                        padding:5px 10px;
+                        overflow:hidden;
+                        text-overflow:ellipsis;
+                        white-space:nowrap;
+                    }
                 }
             }
             tbody{
@@ -108,12 +108,12 @@
 }
 .ant-modal{
     .ant-modal-body{
+        padding:5px 24px;
         p{
             height:30px;
             font-size:12px;
             overflow:hidden;
-            margin:5px 0px;
-            
+            margin-bottom:5px;
             input{
                 width:350px;
                 height:30px;

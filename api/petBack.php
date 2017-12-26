@@ -19,7 +19,6 @@
     $birthday = isset($_POST['birthday']) ? $_POST['birthday'] : "";
     $vaccine = isset($_POST['vaccine']) ? $_POST['vaccine'] : "";
     $addTime = isset($_POST["addTime"]) ? $_POST["addTime"] : "";
-
     $page = isset($_POST["page"]) ? $_POST["page"] : 1;
     $limit = isset($_POST["limit"]) ? $_POST["limit"] : 8;
     $keyWord = isset($_POST["keyWord"]) ? $_POST["keyWord"] : "";
@@ -65,20 +64,32 @@
             echo $endRes;
         }
     }else if($status == "get" && ($id != "" || $goodsId != "")){
-        $sql = "select allimg.goodsImg,pet.* from pet inner join allimg on allimg.goodsId = pet.goodsId WHERE pet.id = '$id'";
-        $result = query_oop($sql);
-        if($result){
+        $sql = "select * from allImg join pet on pet.goodsId=allImg.goodsId";
+        if($goodsId){
+            $sql.=" where pet.goodsId=$goodsId";
+        }else if($id){
+            $sql.=" where pet.id=$id";
+        }
+        $result = query($sql);
+        if(count($result) > 0){
             echo json_encode($result,JSON_UNESCAPED_UNICODE);
         }else{
-            $sql = "select * from pet WHERE pet.id = '$id'";
-            $result = query_oop($sql);
-            if($result){
-                echo json_encode($result,JSON_UNESCAPED_UNICODE);
-            }else{
-                // 表示数据不存在
-                echo 'false';
-            }
+            echo "fail";
         }
+        // $sql = "select allimg.goodsImg,pet.* from pet inner join allimg on allimg.goodsId = pet.goodsId WHERE pet.id = '$id'";
+        // $result = query_oop($sql);
+        // if($result){
+        //     echo json_encode($result,JSON_UNESCAPED_UNICODE);
+        // }else{
+        //     $sql = "select * from pet WHERE pet.id = '$id'";
+        //     $result = query_oop($sql);
+        //     if($result){
+        //         echo json_encode($result,JSON_UNESCAPED_UNICODE);
+        //     }else{
+        //         // 表示数据不存在
+        //         echo 'false';
+        //     }
+        // }
     }else if($status == "upd" && $id != ""){
         if($goodsId){
             $sql = "select * from pet where goodsId='$goodsId'";
@@ -188,7 +199,17 @@
                             if(count($result['data1']) > 0){
                                 echo json_encode($result,JSON_UNESCAPED_UNICODE);
                             }else{
-                                echo "fail";
+                                $sql = "select SQL_CALC_FOUND_ROWS * from pet where classify Like '%$keyWord%' limit ";
+                                $sql .= ($page - 1)*$limit;
+                                $sql .= ', ';
+                                $sql .= $limit;
+                                $sql .= ';select FOUND_ROWS() as rowsCount;';
+                                $result = multi_query_oop($sql);
+                                if(count($result['data1']) > 0){
+                                    echo json_encode($result,JSON_UNESCAPED_UNICODE);
+                                }else{
+                                    echo "fail";
+                                }
                             }
                         }
                     }

@@ -15,16 +15,9 @@ class Datagrid extends React.Component {
             url: this.props.url,
             iCurShow: this.props.iCurShow
         })
-<<<<<<< HEAD
-    }
-    componentDidMount(){
-        this.props.getData({ status: 'page', page:1,url:this.state.url});
-=======
-        // window.sessionStorage.setItem()
     }
     componentDidMount(){
         this.props.getData({ status: 'page', page: 1, url: this.state.url, warning: this.props.warning});
->>>>>>> 723340d67f661b529759775a904b0027336400ee
     }
     getKeys(data){
         var newObj = (data ? Object.keys(data) : []);
@@ -34,7 +27,6 @@ class Datagrid extends React.Component {
         }
         return newObj;
     }
-<<<<<<< HEAD
     changePage(event){
         let params;
         if (event.target.innerHTML == this.state.page){
@@ -57,20 +49,6 @@ class Datagrid extends React.Component {
             this.props.getData(params);
         }
         this.setState({ iCur: event.target.innerHTML, page: event.target.innerHTML });
-=======
-    
-    changePage(event){
-        if (event.target.innerHTML == this.state.page){
-            return;
-        }
-        this.setState({ iCur: event.target.innerHTML, page: event.target.innerHTML});
-        let params = {
-            status:'page',
-            page:event.target.innerHTML,
-            url: this.state.url 
-        };
-        this.props.getData(params);
->>>>>>> 723340d67f661b529759775a904b0027336400ee
     }
     createPage(){
         if(!this.props.total){
@@ -124,44 +102,29 @@ class Datagrid extends React.Component {
                 'keepDate':'有效期',
                 'addTime':'上架时间'
             },
-<<<<<<< HEAD
-            'pet':{
-                'goodsId': '商品编号',
-                'name': '商品名称',
-=======
             'pet': {
                 'goodsId': '商品编号',
                 'name': '名字',
->>>>>>> 723340d67f661b529759775a904b0027336400ee
-                'phoneNum': '手机号',
+                'phoneNum': '用户手机',
                 'breed': '品种',
                 'price': '价格',
                 'goodsImg': '商品图片',
                 'gender': '性别',
                 'color': '颜色',
                 'age': '年龄',
-<<<<<<< HEAD
-=======
                 'classify': '分类',
-                'weight': '体重',
-                'height': '身高',
                 'hot': '热度',
-                'birthday': '生日',
                 'vaccine': '打疫苗次数',
->>>>>>> 723340d67f661b529759775a904b0027336400ee
                 'addTime': '上架时间'
             },
             'viewOrder':{
-                'phoneNumId':'客户姓名',
+                'phoneNumId':'用户手机',
                 'orderId':'订单号码',
                 'status':'订单状态',
                 'qty':'购买数量',
                 'price':'订单总金额',
-<<<<<<< HEAD
                 'postage':'订单邮费',
                 'address':'客户地址',
-=======
->>>>>>> 723340d67f661b529759775a904b0027336400ee
                 'addTime':'订单时间'
             },
             'viewUser': {
@@ -172,15 +135,12 @@ class Datagrid extends React.Component {
                 'address': '通讯地址',
                 'nickname': '昵称',
                 'addTime': '注册时间'
-<<<<<<< HEAD
-=======
             },
             'staff':{
                 'username': '姓名',
                 'password': '密码',
                 'position': '职位',
                 'addTime': '注册时间'
->>>>>>> 723340d67f661b529759775a904b0027336400ee
             }
 
         }
@@ -206,11 +166,7 @@ class Datagrid extends React.Component {
                                     }
                                 })
                             }
-<<<<<<< HEAD
-                            <th><Button type="danger" className={this.state.iCurShow == "viewUser" || this.state.iCurShow == "viewOrder" ? 'hide' : ""} onClick={this.addData.bind(this)}>添加</Button><span className={this.state.iCurShow == "viewUser" || this.state.iCurShow == "viewOrder" ? '' : "hide"}>操作</span></th>
-=======
-                            <th><Button type="danger" className={this.state.iCurShow == "viewUser" || this.state.iCurShow == "viewOrder" || this.props.warning ? 'hide' : ""} onClick={this.addData.bind(this)}>添加</Button><span className={this.state.iCurShow == "viewUser" || this.state.iCurShow == "viewOrder" || this.props.warning ? '' : "hide"}>操作</span></th>
->>>>>>> 723340d67f661b529759775a904b0027336400ee
+                            <th><Button type="danger" className={this.state.iCurShow == "viewUser" || this.state.iCurShow == "viewOrder" || this.props.iCurShow == "pet" || this.props.warning ? 'hide' : ""} onClick={this.addData.bind(this)}>添加</Button><span className={this.state.iCurShow == "viewUser" || this.state.iCurShow == "viewOrder" || this.props.iCurShow == "pet" || this.props.warning ? '' : "hide"}>操作</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -252,7 +208,6 @@ class Datagrid extends React.Component {
                 {
                     this.getKeys(this.props.moreData[0]).map((goods, idx) => {
                         if (this.replaceKey(this.state.iCurShow, goods)) {
-<<<<<<< HEAD
                             if (this.state.status == "1" && goods != "goodsImg"  && goods != "status"){
                                 return <p key={"p" + idx}><label key={"label" + idx}>{this.replaceKey(this.state.iCurShow, goods)}</label><span>{this.props.moreData[0][goods]}</span></p>;
                             } else if (this.state.status == "2" && goods != "goodsImg" && goods != "status"){
@@ -260,16 +215,6 @@ class Datagrid extends React.Component {
                             }
                         }
                         if (goods == "goodsImg" && this.state.status == "1" && this.state.iCurShow !== "viewOrder") {
-=======
-                             if (this.state.status == "1" && goods != "goodsImg"){
-                                    return <p key={"p" + idx}><label key={"label" + idx}>{this.replaceKey(this.state.iCurShow, goods)}</label><span>{this.props.moreData[0][goods]}</span></p>;
-                            } else if (this.state.status == "2" && goods != "goodsImg"){
-                                return <p key={"p" + idx}><label key={"label" + idx}>{this.replaceKey(this.state.iCurShow, goods)}</label><input type="text" id={goods} key={"text"+idx} disabled={goods == "goodsId" ||this.state.iCurShow == "userManage"  ? 'true' : ""} value={this.state.moreList[0][goods]} onChange={this.changeVal.bind(this)} /></p>;
-                            }
-    
-                        }
-                        if (goods == "goodsImg" && this.state.status == "1") {
->>>>>>> 723340d67f661b529759775a904b0027336400ee
                             let arr = this.props.moreData[0][goods].split(",");
                             return <div className="imgBox" key={"p" + idx}><label key={"label" + idx}>{this.replaceKey(this.state.iCurShow, goods)}</label><img src={arr[0]} /></div>;
                         }
@@ -288,12 +233,8 @@ class Datagrid extends React.Component {
                         }
                     })
                 }
-<<<<<<< HEAD
-                    <div className="otherAction"  style={{'marginTop':'10px'}} className={this.state.iCurShow == "viewUser" || this.state.url == "sellerOrder.php" ? 'hide' : ""}>
-=======
-                
-                    <div className="otherAction"  style={{'marginTop':'10px'}} className={this.state.iCurShow == "viewUser" || this.state.iCurShow == "viewOrder" ? 'hide' : ""}>
->>>>>>> 723340d67f661b529759775a904b0027336400ee
+                                                                                            
+                    <div className="otherAction" style={{ 'marginTop': '10px' }} className={this.state.iCurShow == "viewUser" || this.state.iCurShow == "pet" || this.props.warning || this.state.url == "sellerOrder.php" ? 'hide' : ""}>
                         <Button type="primary"  style={{'marginRight':'10px'}} className={this.state.status=="3" ? 'hide' : ""} onClick={this.changeCont.bind(this)}>编辑</Button>
                         <Button type="primary" onClick={this.saveDel.bind(this)}>{this.state.status == "2" || this.state.status == "3" ? "保存" : "删除"}</Button>
                     </div>
@@ -394,7 +335,6 @@ class Datagrid extends React.Component {
                status: 'page',
                page: this.state.page,
                url: this.state.url 
-<<<<<<< HEAD
             };
             notification['success']({
                 message: '操作成功',
@@ -408,30 +348,16 @@ class Datagrid extends React.Component {
     }
 }
 const mapToState = function(state){
-=======
-           };
-           this.props.getData(params);
-       }
-    }
-}
-const mapToState = function(state){
-    console.log(state.Datagrid)
->>>>>>> 723340d67f661b529759775a904b0027336400ee
     return {
         shade: state.Datagrid.shade ? state.Datagrid.shade : 'shade hide',
         loading: state.Datagrid.loading ? state.Datagrid.loading : 'loading hide',
         dataList: state.Datagrid.dataList ? state.Datagrid.dataList : [],
         total: state.Datagrid.total,
         iCur: state.Datagrid.iCurPage,
-<<<<<<< HEAD
         keyWord: state.Datagrid.keyWord ? state.Datagrid.keyWord : "",
         moreData: state.Datagrid.moreData ? state.Datagrid.moreData : "",
         iCurUrl: state.Datagrid.iCurUrl ? state.Datagrid.iCurUrl : "",
         err: state.Datagrid.err ? state.Datagrid.err : ""
-=======
-        moreData: state.Datagrid.moreData ? state.Datagrid.moreData : "",
-        reqUrl: state.Datagrid.reqUrl
->>>>>>> 723340d67f661b529759775a904b0027336400ee
     }
 }
 export default connect(mapToState, datagridAction)(Datagrid);
