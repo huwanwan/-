@@ -1,6 +1,10 @@
 <?php
+<<<<<<< HEAD
     include './DBHelper.php';
     header('Access-Control-Allow-Origin:*'); 
+=======
+    include 'DBHelper.php';
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
     $username = isset($_POST['username']) ? $_POST['username'] : "";
     $password = isset($_POST['password']) ? $_POST['password'] : "";
     $position = isset($_POST['position']) ? $_POST['position'] : "";
@@ -8,6 +12,10 @@
     $id = isset($_POST['id']) ? $_POST['id'] : "";
     $page = isset($_POST["page"]) ? $_POST["page"] : 1;
     $limit = isset($_POST["limit"]) ? $_POST["limit"] : 8;
+<<<<<<< HEAD
+=======
+    $keyWord = isset($_POST["keyWord"]) ? $_POST["keyWord"] : "";
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
     if($status == "add"){
         $sql = "insert into staff (username,password,position) values ('$username','$password','$position')";
         $result = excute_oop($sql);
@@ -44,6 +52,17 @@
         }else{
             echo 'false';
         }
+<<<<<<< HEAD
+=======
+    }else if($username != ""){
+        $sql = "select * from staff where username = '$username'";
+        $result = query_oop($sql);
+        if($result){
+            echo json_encode($result,JSON_UNESCAPED_UNICODE);
+        }else{
+            echo 'fail';
+        }
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
     }else if($username != "" && $password != ""){
         $sql = "select * from staff where username = '$username' and password = '$password'";
         
@@ -51,6 +70,10 @@
         // var_dump($result);
         // 输出结果
         if($result){
+<<<<<<< HEAD
+=======
+            // echo "ok";
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
             if($result[0]['position'] == "管理员"){
                 echo '管理员';
             }else if($result[0]['position'] == "员工"){
@@ -60,6 +83,7 @@
             echo 'fail';
         }
     }else if($status=="page"){
+<<<<<<< HEAD
         $sql = "select SQL_CALC_FOUND_ROWS * from staff where 1=1 limit ";
         $sql .= ($page - 1)*$limit;
         $sql .= ', ';
@@ -71,6 +95,45 @@
             echo "fail";
         }else{
             echo json_encode($result,JSON_UNESCAPED_UNICODE);
+=======
+        if($keyWord){
+            $sql = "select SQL_CALC_FOUND_ROWS * from staff where username='$keyWord' limit ";
+            $sql .= ($page - 1)*$limit;
+            $sql .= ', ';
+            $sql .= $limit;
+            $sql .= ';select FOUND_ROWS() as rowsCount;';
+            // echo $sql;
+            $result = multi_query_oop($sql);
+            if(count($result['data1']) > 0){
+                echo json_encode($result,JSON_UNESCAPED_UNICODE);
+            }else{
+                $sql = "select SQL_CALC_FOUND_ROWS * from staff where position='$keyWord' limit ";
+                $sql .= ($page - 1)*$limit;
+                $sql .= ', ';
+                $sql .= $limit;
+                $sql .= ';select FOUND_ROWS() as rowsCount;';
+                $result = multi_query_oop($sql);
+                if(count($result['data1']) > 0){
+                    echo json_encode($result,JSON_UNESCAPED_UNICODE);
+                }else{
+                    echo "fail";
+                }
+                
+            }
+        }else{
+            $sql = "select SQL_CALC_FOUND_ROWS * from staff where 1=1 limit ";
+            $sql .= ($page - 1)*$limit;
+            $sql .= ', ';
+            $sql .= $limit;
+            $sql .= ';select FOUND_ROWS() as rowsCount;';
+            $result = multi_query_oop($sql);
+            $result['data1'][0]['password']='***';
+            if(count($result['data1']) == 0){
+                echo "fail";
+            }else{
+                echo json_encode($result,JSON_UNESCAPED_UNICODE);
+            }
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
         }
     }
 

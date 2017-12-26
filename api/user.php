@@ -13,6 +13,10 @@
     // state=1 表示浏览历史，state=2 表示收藏
     $state = isset($_POST['state']) ? $_POST['state'] : "";
     $goodsId = isset($_POST['goodsId']) ? $_POST['goodsId'] : "";
+<<<<<<< HEAD
+=======
+    $keyWord = isset($_POST["keyWord"]) ? $_POST["keyWord"] : "";
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
 
     if($status == "get" && $phoneNum != ""){
         // 查询
@@ -92,6 +96,7 @@
             echo 'false';
         }
     }else if($state == "1" || $state == "2"){
+<<<<<<< HEAD
         
         // 查询收藏与浏览记录
         $sql = "select h.phoneNumId,pet.* from `history_collect` as h inner join user on user.phoneNum = h.phoneNumId inner join pet on pet.goodsId = h.goodsId WHERE h.`status` = '$state'";
@@ -104,4 +109,86 @@
         }
     }
 
+=======
+        // 查询收藏与浏览记录
+        $sql = "select allimg.goodsImg,history_collect.status,pet.* from pet inner join history_collect on history_collect.goodsId = pet.goodsId inner join allimg on history_collect.goodsId = allimg.goodsId WHERE history_collect.status = '$state' and history_collect.phoneNumId = '$phoneNum'";
+        $result = query_oop($sql);
+        if($result){
+            // $sql1 = "select history_collect.status,proprietary.* from proprietary inner join history_collect on history_collect.goodsId = proprietary.goodsId WHERE history_collect.status = '$state' and history_collect.phoneNumId = '$phoneNum'";
+            // $result1 = query_oop($sql1);
+            // if($result1){
+            //     $result1[count($result1)] = $result;
+            //     echo json_encode($result1,JSON_UNESCAPED_UNICODE);
+            // }else{
+            // }
+            echo json_encode($result,JSON_UNESCAPED_UNICODE);
+        }else{
+            $sql = "select allimg.goodsImg,history_collect.status,proprietary.* from proprietary inner join allimg on history_collect.goodsId = allimg.goodsId inner join history_collect on history_collect.goodsId = proprietary.goodsId WHERE history_collect.status = '$state' and history_collect.phoneNumId = '$phoneNum'";
+            $result = query_oop($sql);
+            if($result){
+                echo json_encode($result,JSON_UNESCAPED_UNICODE);
+            }else{
+                echo 'false';
+            }
+        }
+    }else if($phoneNum != ""){
+        $sql = "select * from user where phoneNum = '$phoneNum'";
+        $result = query_oop($sql);
+        if($result){
+            echo json_encode($result,JSON_UNESCAPED_UNICODE);
+        }else{
+            echo 'fail';
+        }
+    }else if($status=="page"){
+        if($keyWord){
+            $sql = "select SQL_CALC_FOUND_ROWS * from user where goodsId='$keyWord' limit ";
+            $sql .= ($page - 1)*$limit;
+            $sql .= ', ';
+            $sql .= $limit;
+            $sql .= ';select FOUND_ROWS() as rowsCount;';
+            // echo $sql;
+            $result = multi_query_oop($sql);
+            if(count($result['data1']) > 0){
+                echo json_encode($result,JSON_UNESCAPED_UNICODE);
+            }else{
+                $sql = "select SQL_CALC_FOUND_ROWS * from user where phoneNum='$keyWord' limit ";
+                $sql .= ($page - 1)*$limit;
+                $sql .= ', ';
+                $sql .= $limit;
+                $sql .= ';select FOUND_ROWS() as rowsCount;';
+                $result = multi_query_oop($sql);
+                if(count($result['data1']) > 0){
+                    echo json_encode($result,JSON_UNESCAPED_UNICODE);
+                }else{
+                    $sql = "select SQL_CALC_FOUND_ROWS * from user where address Like '%$keyWord%' limit ";
+                    $sql .= ($page - 1)*$limit;
+                    $sql .= ', ';
+                    $sql .= $limit;
+                    $sql .= ';select FOUND_ROWS() as rowsCount;';
+                    $result = multi_query_oop($sql);
+                    if(count($result['data1']) > 0){
+                        echo json_encode($result,JSON_UNESCAPED_UNICODE);
+                    }else{
+                        echo "fail";
+                    }
+                }
+                
+            }
+        }else{
+            $sql = "select SQL_CALC_FOUND_ROWS * from user where 1=1 limit ";
+            $sql .= ($page - 1)*$limit;
+            $sql .= ', ';
+            $sql .= $limit;
+            $sql .= ';select FOUND_ROWS() as rowsCount;';
+            $result = multi_query_oop($sql);
+            if(count($result['data1']) == 0){
+                echo "fail";
+            }else{
+                echo json_encode($result,JSON_UNESCAPED_UNICODE);
+            }
+        }
+    }
+
+
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
 ?>

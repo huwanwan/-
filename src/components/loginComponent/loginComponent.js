@@ -52,7 +52,11 @@ class LoginComponent extends React.Component{
         )
     }
     componentDidUpdate(){
+<<<<<<< HEAD
         if (this.props.position != "" && this.props.position != "fail" && this.state.username != "") {
+=======
+        if (this.props.position != "" && this.props.position != "fail") {
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
             window.sessionStorage.setItem('position', this.props.position);
             hashHistory.push("/index");
         }
@@ -69,7 +73,11 @@ const mapToState = function(state){
         status: state.Login.status,
         class: state.Login.class ? state.Login.class : 'float hide',
         position: state.Login.position ? state.Login.position : "",
+<<<<<<< HEAD
         err:state.Login.err == "" ? "" : 'hide'
+=======
+        err:state.Login.err == "" ? "" : 'hide',
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
     }
 }
 export default connect(mapToState, LoginAction)(LoginComponent);

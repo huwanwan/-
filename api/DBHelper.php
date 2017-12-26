@@ -5,6 +5,10 @@
         $username = 'root';
         $password = '';
         $database = 'pet';
+<<<<<<< HEAD
+=======
+        header('Access-Control-Allow-Origin:*');
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
         //连接数据库
         $conn = new mysqli($servername, $username, $password, $database);
         // 检测连接

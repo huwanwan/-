@@ -42,6 +42,7 @@
                 th{
                     padding:5px;
                 }
+<<<<<<< HEAD
                 >td{
                     font-size:12px; 
                     max-height:65px;
@@ -53,6 +54,16 @@
                         text-overflow:ellipsis;
                         white-space:nowrap;
                     }
+=======
+                
+                td{
+                    font-size:12px; 
+                    padding:5px 6px;     
+                }
+                td:nth-child(2){
+                    width:180px;
+                    text-align:left;
+>>>>>>> 723340d67f661b529759775a904b0027336400ee
                 }
             }
             tbody{
