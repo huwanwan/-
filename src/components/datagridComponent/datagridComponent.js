@@ -1,6 +1,6 @@
 import React from 'React';
 import { connect } from 'react-redux';
-import { Spin, Modal , Alert,Button} from 'antd';
+import { Spin, Modal, message, notification ,Alert,Button} from 'antd';
 
 import * as datagridAction from '../../actions/datagridAction';
 import '../../sass/datagrid.scss';
@@ -147,6 +147,7 @@ class Datagrid extends React.Component {
             <div className="datagrid">
                 <div style={{ width: '100%', height:'500px','position':'absolute',left:'240px',top:'100px'}} className={this.props.shade}></div>
                 <Spin className={this.props.loading} />
+
                 <table>
                     <thead>
                         <tr>
@@ -186,6 +187,7 @@ class Datagrid extends React.Component {
                 <ul>
                     {this.createPage()}
                 </ul>
+
                 <Modal
                     title="更多详情"
                     visible={this.state.visible}
@@ -194,7 +196,6 @@ class Datagrid extends React.Component {
                     okText="确认"
                     cancelText="取消"
                 >
-                
                 <Alert message={this.state.alert} className={this.state.err == 1 ? 'hide' : ""} type="error" />
                 {
                     this.getKeys(this.props.moreData[0]).map((goods, idx) => {
@@ -210,7 +211,6 @@ class Datagrid extends React.Component {
                             let arr = this.props.moreData[0][goods].split(",");
                             return <div className="imgBox" key={"p" + idx}><label key={"label" + idx}>{this.replaceKey(this.state.iCurShow, goods)}</label><img src={arr[0]} /></div>;
                         }
-
                     })
                 } 
                 {
@@ -295,6 +295,10 @@ class Datagrid extends React.Component {
             }
             this.props.getData(this.state.moreList[0]);
         } else if (this.state.status == "1"){
+            if (window.sessionStorage.getItem('position') == "员工"){
+                message.warning('很抱歉,您没有删除权限,请联系管理员!');
+                return;
+            }
             this.props.getData({
                 status:'del',
                 id: this.state.id,
@@ -320,7 +324,7 @@ class Datagrid extends React.Component {
     }
     componentDidUpdate(){
         if(this.props.moreData == "ok"){
-           let params = {
+            let params = {
                status: 'page',
                page: this.state.page,
                url: this.state.url 

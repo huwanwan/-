@@ -1,5 +1,6 @@
 <?php
-    include './DBHelper.php';
+    include './DBHelper.php'; 
+    header('Access-Control-Allow-Origin:*');
     /*
         参数:
             phoneNum:用户注册手机号码;
@@ -10,11 +11,13 @@
             status:订单类型,1:待支付;2.已支付;3.退款;
     
     */
-    $phoneNum = isset($_POST["phoneNum"]) ? isset($_POST["phoneNum"]) : ""; 
-    $userType = isset($_POST["userType"]) ? isset($_POST["userType"]) : ""; 
+    $phoneNum = isset($_POST["phoneNum"]) ? $_POST["phoneNum"] : ""; 
+    $userType = isset($_POST["userType"]) ? $_POST["userType"] : ""; 
     $type = isset($_POST["type"]) ? $_POST["type"] : "";
     $orderId = isset($_POST["orderId"]) ? $_POST["orderId"] : "";
     $goodsId = isset($_POST["goodsId"]) ? $_POST["goodsId"] : "";
+    $address = isset($_POST["address"]) ? $_POST["address"] : "";
+    $postage = isset($_POST["postage"]) ? $_POST["postage"] : "";
     $status = isset($_POST["status"]) ? $_POST["status"] : "";
     $page = isset($_POST["page"]) ? $_POST["page"] : 1;
     $limit = isset($_POST["limit"]) ? $_POST["limit"] : 12;
@@ -30,7 +33,7 @@
 
     // add;参数 $type,$orderId,$phoneNum,$status,$goodsId,$userType;
     if($type == "add"){
-        $sql = "insert into ".$table."(orderId,phoneNum,status)values('$orderId','$phoneNum','$status')";
+        $sql = "insert into ".$table."(orderId,phoneNumId,address,postage,status)values('$orderId','$phoneNum','$address','$postage','$status')";
         $goodsId = explode(',',$goodsId);
         for($i=0;$i < count($goodsId);$i++){
             $sql.=";insert into ".$tableGoods."(orderId,goodsId)values('$orderId','$goodsId[$i]')";
@@ -55,8 +58,8 @@
             }  
         echo $endRes;
     }else if($type == 'get'){//get; 参数 $type,$phoneNum,$status,$userType;
-        $sql = "select * from ".$tableGoods." join ".$table." on ".$table.".orderId=".$tableGoods.".orderId join pet on ".$tableGoods.".goodsId=pet.goodsId join allImg on pet.goodsId = allImg.goodsId where ".$table.".phoneNum='$phoneNum' AND ".$table.".status='$status'";
-        $sql.= ";select * from ".$tableGoods." join ".$table." on ".$table.".orderId=".$tableGoods.".orderId join proprietary on ".$tableGoods.".goodsId=proprietary.goodsId join allImg on proprietary.goodsId = allImg.goodsId where ".$table.".phoneNum='$phoneNum' AND ".$table.".status='$status'";
+        $sql = "select * from ".$tableGoods." join ".$table." on ".$table.".orderId=".$tableGoods.".orderId join pet on ".$tableGoods.".goodsId=pet.goodsId join allImg on pet.goodsId = allImg.goodsId where ".$table.".phoneNumId='$phoneNum' AND ".$table.".status='$status'";
+        $sql.= ";select * from ".$tableGoods." join ".$table." on ".$table.".orderId=".$tableGoods.".orderId join proprietary on ".$tableGoods.".goodsId=proprietary.goodsId join allImg on proprietary.goodsId = allImg.goodsId where ".$table.".phoneNumId='$phoneNum' AND ".$table.".status='$status'";
         $result = multi_query_oop($sql);
         echo json_encode($result,JSON_UNESCAPED_UNICODE);
     }else if($type == "proprietary"){

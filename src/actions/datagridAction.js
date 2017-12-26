@@ -15,11 +15,4 @@ export function getData(params){
         }
     }
 }
-// export function uploadImg(params){
-//     return {
-//         type:'upImg',
-//         'url':'form.php',
-//         method:'post',
-//         'params':params
-//     }
-// }
+

@@ -6,6 +6,7 @@ export default function(state={},action){
             newState.loading = "loading";
             newState.iCurPage = action.page;
             newState.moreData = "";
+            newState.err = "";
             break;
         case 'datagridRequest':
             let data = disposeData(action.res.data);
@@ -17,6 +18,8 @@ export default function(state={},action){
             break;    
         case 'error':
             newState.err = action.error;
+            newState.shade = "shade hide";
+            newState.loading = "loading hide";
             break;
         case 'datagridSingle':
             newState.moreData = dispatchSingle(action.res.data);
@@ -90,6 +93,8 @@ function disposeData(result){
 function dispatchSingle(res){
     if(res == "ok"){
         return "ok";
+    }else if(res == "fail"){
+        return 'fail';
     }
     if(res[0].orderId){
         for(var i = 1;i < res.length;i++){

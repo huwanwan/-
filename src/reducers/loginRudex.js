@@ -27,7 +27,6 @@ export default function LoginRudex(state={},action){
     return newState;
 }
 function testRes(res){
-    console.log(res,'aaaa')
     if (res.data != "fail"){
         return {
             status: true,
